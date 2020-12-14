@@ -1,0 +1,11 @@
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  .sideNavTitle {
+    cursor: pointer;
+    padding: 0.5rem 0;
+    .mat-icon {
+      font-size: 15px;
+    }
+  }
+}

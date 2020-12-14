@@ -1,0 +1,31 @@
+<form class="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search in Library</mat-label>
+    <input matInput placeholder="Search" formControlName="searchBooks" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</form>
+<div class="cards">
+  <mat-card class="books-card" *ngFor="let item of bookItems" (click)="onBookSelect(item)">
+    <div class="cardHeader">
+      <mat-card-header>
+        <mat-card-title>{{item.volumeInfo.title}}</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <div class="header-image" *ngIf="item.volumeInfo.imageLinks">
+        <img src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="">
+      </div>
+    </div>
+    <mat-card-content>
+      <p>
+        {{item.volumeInfo.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="footerHeader">
+        <span>Written By:</span>
+      </div>
+      <span *ngIf="item.volumeInfo.authors">{{item.volumeInfo.authors.join(' and ')}}</span>
+    </mat-card-footer>
+  </mat-card>
+</div>

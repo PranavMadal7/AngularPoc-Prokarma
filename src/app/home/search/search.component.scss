@@ -1,0 +1,47 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1em;
+  .books-card {
+    &:hover {
+      box-shadow: 2px 2px 1px 2px #e0e0df;
+    }
+    .cardHeader {
+      display: flex;
+      mat-card-header {
+        flex: 1;
+        margin: 0;
+      }
+      .header-image {
+        order: 1;
+        border-radius: 0;
+        img {
+          height: 3.375rem;
+        }
+      }
+    }
+    mat-card-content {
+      p {
+        padding: 0.3rem 0 0 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+    mat-card-footer {
+      padding: 0 1.9rem 1rem;
+      .footerHeader {
+        font-weight: 500;
+      }
+    }
+  }
+}
+.mat-card-header-text {
+  flex: 1;
+  margin: 0;
+}

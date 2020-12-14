@@ -1,0 +1,49 @@
+<mat-card class="book-card">
+  <div class="cardHeader">
+    <mat-card-title class="title">{{item}}</mat-card-title>
+    <div class="header-image">
+      <img
+        src="http://books.google.com/books/content?id=eNExy_X1YYcC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+        alt=""
+      />
+    </div>
+  </div>
+  <mat-card-content class="cardContent">
+    <div>
+      <span class="cardTitle">Rating: </span>
+      <span>
+        <mat-icon>star_rate</mat-icon>
+        <mat-icon>star_rate</mat-icon>
+        <mat-icon>star_rate</mat-icon>
+        <mat-icon>star_rate</mat-icon>
+        <mat-icon>star_rate</mat-icon>
+      </span>
+    </div>
+    <div>
+      <span class="cardTitle">Publisher: </span>
+      <span>{{item}}</span>
+    </div>
+    <div>
+      <span class="cardTitle">Page Count: </span>
+      <span></span>
+    </div>
+    <div>
+      <span class="cardTitle">Language: </span>
+      <span></span>
+    </div>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz
+      breeds of dog from Japan. A small, agile dog that copes very well with
+      mountainous terrain, the Shiba Inu was originally bred for hunting.
+    </p>
+  </mat-card-content>
+  <div class="author">
+    <span class="authorTitle">Written By:</span>
+    <span>Brad</span>
+  </div>
+  <!-- <span *ngIf="item.volumeInfo.authors">{{item.volumeInfo.authors.join(' and ')}}</span> -->
+  <mat-card-actions>
+    <button mat-flat-button color="accent">ADD TO CART</button>
+    <button mat-flat-button color="accent">BUY</button>
+  </mat-card-actions>
+</mat-card>
