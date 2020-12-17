@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { BookService } from 'src/app/shared/book.service';
+import { BookService } from 'src/app/shared/services/book.service';
 
 @Component({
   selector: 'app-book',
@@ -12,32 +13,25 @@ export class BookComponent implements OnInit, OnDestroy {
   book: any;
   item: string;
   bookSubs: Subscription;
-  constructor(private bookService: BookService) {
-    this.bookSubs = this.bookService.getBookItemListener().subscribe((res) => {
-      debugger
-      console.log('hihiad', res);
-      this.item = res.volumeInfo.title;
-      console.log(this.item);
-    });
-   }
+  constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit() {
-    debugger
-    console.log('inside book component');
-    // this.bookSubs = this.bookService.getBookItemListener().subscribe((res) => {
-    //   debugger
-    //   console.log('hihiad', res);
-    //   this.item = res.volumeInfo.title;
-    //   console.log(this.item);
-    // });
+    this.bookSubs = this.bookService.getBookItemListener().subscribe((res) => {
+      this.book = res;
+    });
+  }
 
-    // this.book = this.bookService.booksItems;
-    // this.item = this.book.volumeInfo.title;
+  addToCart() {
+    this.bookService.addCart(this.book);
+    this.bookService.bookItem.next(this.book);
+    this.router.navigate(['/addToCart']);
+  }
 
+  buyNow() {
+    this.router.navigate(['/buyNow']);
   }
 
   ngOnDestroy() {
-    debugger
     this.bookSubs.unsubscribe();
   }
 }

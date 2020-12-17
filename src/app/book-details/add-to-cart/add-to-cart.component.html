@@ -1,0 +1,25 @@
+<ng-container *ngIf="books.length">
+  <mat-card class="book-card" *ngFor="let book of books">
+    <div class="cardHeader">
+      <mat-card-title class="title">{{ book.volumeInfo.title }}</mat-card-title>
+      <div class="header-image">
+        <img src="{{ book.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+      </div>
+    </div>
+    <mat-card-content class="cardContent">
+      <p>{{ book.volumeInfo.description }}</p>
+    </mat-card-content>
+    <div class="author">
+      <span class="authorTitle">Written By:</span>
+      <span>{{ book.volumeInfo.authors.join(" and ") }}</span>
+    </div>
+    <mat-card-actions>
+      <button mat-flat-button color="accent" (click)="deleteBook(book)">
+        Delete
+      </button>
+      <button mat-flat-button color="accent" (click)="purchase(book)">
+        Proceed to purchase
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

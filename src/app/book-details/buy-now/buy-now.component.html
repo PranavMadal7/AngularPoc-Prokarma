@@ -1,0 +1,77 @@
+<mat-card style="padding: 0">
+  <div class="buyNowView">
+    <div class="icons">
+      <mat-icon>request_page</mat-icon>
+    </div>
+    <div class="billingInfo">
+      <div class="biilingHeader"><span>Billing Info</span></div>
+      <form [formGroup]="billingForm" (ngSubmit)="onSubmit()" class="billForm">
+        <mat-form-field class="field-full-width">
+          <mat-label>Your Name</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            placeholder="Enter your name"
+          />
+          <mat-error *ngIf="f.name.hasError('required')"
+            >Please enter your name</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="field-full-width">
+          <mat-label>Your Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="Ex. test@test.com"
+          />
+          <mat-error
+            *ngIf="f.email.hasError('email') && !f.email.hasError('required')"
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="f.email.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field-full-width">
+          <mat-label>Your phone number</mat-label>
+          <input
+            type="number"
+            matInput
+            formControlName="phoneNumber"
+            placeholder="Enter number"
+          />
+          <mat-error *ngIf="f.phoneNumber.hasError('required')"
+            >Please enter your phone number</mat-error
+          >
+          <!-- <mat-error *ngIf="f.name.errors.min && f.name.errors.touched">Please enter a valid 10 digit number</mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="field-full-width">
+          <mat-label>Your address</mat-label>
+          <textarea
+            type="text"
+            matInput
+            placeholder="Enter your address"
+            formControlName="address"
+          ></textarea>
+          <mat-hint>Please enter your correct address</mat-hint>
+          <mat-error *ngIf="f.phoneNumber.hasError('required')"
+            >Please enter your address</mat-error
+          >
+        </mat-form-field>
+        <div>
+          <button
+            mat-stroked-button
+            style="float: right"
+            (click)="openSnackBar()"
+            aria-label="Show an example snack-bar"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-card>

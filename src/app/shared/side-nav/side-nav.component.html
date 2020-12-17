@@ -1,19 +1,19 @@
 <aside class="sideNav">
   <div class="sideNavTitle">
-    <a>
+    <a [routerLink]="['/search']">
       <mat-icon>search</mat-icon>
       <span>Search</span>
     </a>
   </div>
   <div class="sideNavTitle">
-    <a>
-      <mat-icon>shopping_cart</mat-icon>
+    <a [routerLink]="['/addToCart']">
+      <mat-icon matBadge="{{cartCount}}" matBadgePosition="before" matBadgeColor="accent">shopping_cart</mat-icon>
       <span>Cart</span>
     </a>
   </div>
   <div class="sideNavTitle">
-    <a>
-      <mat-icon>library_books</mat-icon>
+    <a [routerLink]="['/myCollection']">
+      <mat-icon matBadge="{{collectionCount}}" matBadgePosition="before" matBadgeColor="accent">library_books</mat-icon>
       <span>My Collection</span>
     </a>
   </div>

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ApiService } from 'src/app/shared/api.service';
-import { BookService } from 'src/app/shared/book.service';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { BookService } from 'src/app/shared/services/book.service';
 
 @Component({
   selector: 'app-search',
@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
 
   onBookSelect(bookItem) {
     this.bookService.bookItem.next(bookItem);
+    this.bookService.booksItems = bookItem;
     this.router.navigate(['/book']);
-    // this.bookService.booksItems = bookItem;
   }
 }

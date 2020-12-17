@@ -1,0 +1,40 @@
+<ng-container *ngIf="books.length">
+  <mat-card class="book-card" *ngFor="let book of books">
+    <div class="cardHeader">
+      <mat-card-title class="title">{{ book.volumeInfo.title }}</mat-card-title>
+      <div class="header-image">
+        <img src="{{ book.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+      </div>
+    </div>
+    <mat-card-content class="cardContent">
+      <p>{{ book.volumeInfo.description }}</p>
+    </mat-card-content>
+    <div class="author">
+      <span class="authorTitle">Written By:</span>
+    </div>
+    <span *ngIf="book.volumeInfo.authors">{{
+      book.volumeInfo.authors.join(" and ")
+    }}</span>
+    <mat-card-footer>
+      <div class="footerHeader">
+        <span>Billing Address</span>
+      </div>
+      <div class="footerHeader">
+        <span>Name: </span>
+        <span class="footerVal">{{ book.bill.name }}</span>
+      </div>
+      <div class="footerHeader">
+        <span>Email: </span>
+        <span class="footerVal">{{ book.bill.email }}</span>
+      </div>
+      <div class="footerHeader">
+        <span>Phone: </span>
+        <span class="footerVal">{{ book.bill.phoneNumber }}</span>
+      </div>
+      <div class="footerHeader">
+        <span>Address: </span>
+        <span class="footerVal">{{ book.bill.address }}</span>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
