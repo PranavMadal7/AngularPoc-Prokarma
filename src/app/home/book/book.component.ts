@@ -13,11 +13,22 @@ export class BookComponent implements OnInit, OnDestroy {
   book: any;
   item: string;
   bookSubs: Subscription;
+  rating: number;
+  starList: boolean[] = [true, true, true, true, true];
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit() {
     this.bookSubs = this.bookService.getBookItemListener().subscribe((res) => {
       this.book = res;
+      this.rating = res.volumeInfo.averageRating;
+      let data = this.rating + 1;
+      for (var i = 0; i <= 4; i++) {
+        if (i <= data) {
+          this.starList[i] = false;
+        } else {
+          this.starList[i] = true;
+        }
+      }
     });
   }
 
