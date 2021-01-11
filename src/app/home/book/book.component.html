@@ -1,9 +1,9 @@
-<mat-card class="book-card">
+<mat-card class="book-card" *ngIf="selectedBook$ |async as selectedBook">
   <div class="cardHeader">
-    <mat-card-title class="title">{{book.volumeInfo.title}}</mat-card-title>
-    <div class="header-image">
+    <mat-card-title class="title">{{selectedBook.volumeInfo.title}}</mat-card-title>
+    <div class="header-image" *ngIf="selectedBook.volumeInfo.imageLinks.smallThumbnail">
       <img
-        src="{{book.volumeInfo.imageLinks.smallThumbnail}}"
+        src="{{selectedBook.volumeInfo.imageLinks.smallThumbnail}}"
         alt=""
       />
     </div>
@@ -11,30 +11,26 @@
   <mat-card-content class="cardContent">
     <div>
       <span class="cardTitle">Rating: </span>
-      <span *ngFor="let item of starList; let i=index ">
-        <mat-icon *ngIf="!item">star_rate</mat-icon>
-        <mat-icon *ngIf="item">star_border</mat-icon>
-      </span>
+      <span>{{selectedBook.volumeInfo.averageRating}}</span>
     </div>
     <div>
       <span class="cardTitle">Publisher: </span>
-      <span>{{book.volumeInfo.publisher}}</span>
+      <span>{{selectedBook.volumeInfo.publisher}}</span>
     </div>
     <div>
       <span class="cardTitle">Page Count: </span>
-      <span>{{book.volumeInfo.pageCount}}</span>
+      <span>{{selectedBook.volumeInfo.pageCount}}</span>
     </div>
     <div>
       <span class="cardTitle">Language: </span>
-      <span>{{book.volumeInfo.language}}</span>
+      <span>{{selectedBook.volumeInfo.language}}</span>
     </div>
-    <p>{{book.volumeInfo.description}}</p>
+    <p>{{selectedBook.volumeInfo.description}}</p>
   </mat-card-content>
   <div class="author">
     <span class="authorTitle">Written By:</span>
-    <span>{{book.volumeInfo.authors.join(' and ')}}</span>
+    <span>{{selectedBook.volumeInfo.authors.join(' and ')}}</span>
   </div>
-  <!-- <span *ngIf="item.volumeInfo.authors">{{item.volumeInfo.authors.join(' and ')}}</span> -->
   <mat-card-actions>
     <button mat-flat-button color="accent" (click)="addToCart()">ADD TO CART</button>
     <button mat-flat-button color="accent" (click)="buyNow()">BUY</button>

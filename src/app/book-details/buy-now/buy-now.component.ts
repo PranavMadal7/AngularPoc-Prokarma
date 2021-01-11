@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BookService } from 'src/app/shared/services/book.service';
+import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
   selector: 'app-buy-now',
@@ -16,7 +16,7 @@ export class BuyNowComponent implements OnInit {
   book: any = {};
 
   constructor(
-    private bookService: BookService,
+    private bookfascade: BooksFascade,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -35,10 +35,6 @@ export class BuyNowComponent implements OnInit {
       }),
       address: new FormControl('', { validators: [Validators.required] }),
     });
-
-    this.bookSubs = this.bookService.bookItem.subscribe((res) => {
-      this.book = { ...res };
-    });
   }
 
   // convinence getter for ease access to form field
@@ -48,22 +44,13 @@ export class BuyNowComponent implements OnInit {
 
   // submission of billing info
   onSubmit() {
-    if (
-      !this.billingForm.invalid &&
-      Object.keys(this.book).length !== 0 &&
-      this.book.constructor === Object
-    ) {
-      this.bookService.addBookCollection(this.book);
-      this.book.bill = this.billingForm.value;
+    if (!this.billingForm.invalid) {
+      this.bookfascade.addUser({ user: this.billingForm.value });
     }
   }
 
   openSnackBar() {
-    if (
-      !this.billingForm.invalid &&
-      Object.keys(this.book).length !== 0 &&
-      this.book.constructor === Object
-    ) {
+    if (!this.billingForm.invalid) {
       this._snackBar.open('Successfull', 'close', {
         duration: 2000,
       });

@@ -1,32 +1,24 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import * as fromReducer from './books.reducer';
+import * as fromAction from './books.action';
+import * as cartReducer from './cart.reducer';
+import * as cartAction from './cart.action';
+import { BooksFascade } from './books.fascade';
+
+import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StoreModule } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { BooksFascade } from 'src/app/store/books.fascade';
-import { reducers } from 'src/app/store/books.selector';
 
-import { AddToCartComponent } from './add-to-cart.component';
-
-describe('AddToCartComponent', () => {
-  let component: AddToCartComponent;
-  let fixture: ComponentFixture<AddToCartComponent>;
+describe('ngrx-store', () => {
   let book;
-
+  let initialUser;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
-      declarations: [AddToCartComponent],
+      imports: [RouterTestingModule],
+      declarations: [],
       providers: [BooksFascade],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddToCartComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
     book = [
       {
         kind: 'books#volume',
@@ -89,46 +81,51 @@ describe('AddToCartComponent', () => {
         },
       },
     ];
+    initialUser = {
+      name: 'anurag',
+      email: 'ang@gamil',
+      mobile: '3434334',
+      address: 'hyd',
+    };
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should set the serarchTerm', () => {
+    const initialState = fromReducer.initialState;
+    const action = fromAction.loadBooks({ searchTerm: 'angular' });
+    const state = fromReducer.reducer(initialState, action);
+
+    expect(state.searchTerm).toBe('angular');
   });
 
-  it('should set all books count', inject(
-    [BooksFascade],
-    (fascade: BooksFascade) => {
-      fascade.cartItems$ = new Observable((obs) => {
-        obs.next(book);
-        obs.complete();
-      });
-      component.ngOnInit();
-      fixture.detectChanges();
-      component.cartItems$.subscribe((data) => {
-        expect(data).toEqual(book);
-      });
-    }
-  ));
+  it('should set the should set allBooks', () => {
+    const initialState = fromReducer.initialState;
+    const action = fromAction.booksLoaded({ books: book });
+    const state = fromReducer.reducer(initialState, action);
 
-  it('on buy should navigate to biling and add it to collection', inject(
-    [BooksFascade, Router],
-    (fascade: BooksFascade, router: Router) => {
-      const spy1 = spyOn(router, 'navigate');
-      const spy = spyOn(fascade, 'addToCollection');
-      component.purchase(book[0]);
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith({ book: book[0] });
-      expect(spy1).toHaveBeenCalledWith(['/buyNow']);
-    }
-  ));
+    expect(state.AllBooks).not.toBe(null);
+  });
 
-  it('should remove from cart', inject(
-    [BooksFascade],
-    (facade: BooksFascade) => {
-      const spy = spyOn(facade, 'removeFromCart');
-      component.deleteBook(book);
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith(book.id);
-    }
-  ));
+  it('should add the item to cart', () => {
+    const initialState = fromReducer.initialState;
+    const action = fromAction.addedToCart({ book: book[0] });
+    const state = fromReducer.reducer(initialState, action);
+
+    expect(state.cartItems).not.toBe(null);
+  });
+
+  it('should add the item to collection', () => {
+    const initialState = fromReducer.initialState;
+    const action = fromAction.addedToCollection({ book: book[0] });
+    const state = fromReducer.reducer(initialState, action);
+
+    expect(state.collectionItems).not.toBe(null);
+  });
+
+  it('should add the User', () => {
+    const initialState = fromReducer.initialState;
+    const action = fromAction.addUser({ user: initialUser });
+    const state = fromReducer.reducer(initialState, action);
+
+    expect(state.User.name).toBe('anurag');
+  });
 });

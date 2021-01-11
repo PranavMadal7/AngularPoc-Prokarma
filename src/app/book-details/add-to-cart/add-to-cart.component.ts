@@ -1,44 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { BookService } from 'src/app/shared/services/book.service';
+import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
   selector: 'app-add-to-cart',
   templateUrl: './add-to-cart.component.html',
-  styleUrls: ['./add-to-cart.component.scss']
+  styleUrls: ['./add-to-cart.component.scss'],
 })
-export class AddToCartComponent implements OnInit, OnDestroy {
+export class AddToCartComponent implements OnInit {
   books: any[] = [];
-  bookSubs: Subscription;
+  // bookSubs: Subscription;
   count: number;
-  constructor(private bookService: BookService, private router: Router) { }
+  cartItems$: Observable<any[]>;
+  constructor(private bookFascade: BooksFascade, private router: Router) {}
 
   ngOnInit(): void {
-    this.bookSubs = this.bookService.getCartListener().subscribe(res => {
-      this.books = res;
-    });
-
+    this.cartItems$ = this.bookFascade.cartItems$;
   }
 
   // deletion of book from cart
   deleteBook(book) {
-    this.bookService.removeCartBook(book);
-    this.bookSubs = this.bookService.getCartListener().subscribe(res => {
-      this.books = res;
-    });
+    this.bookFascade.removeFromCart(book.id);
   }
 
   // proceed to purchase from cart
   purchase(book) {
-    this.bookService.bookItem.next(book);
+    this.bookFascade.addToCollection({ book });
     this.router.navigate(['/buyNow']);
   }
-
-  // unsubscribe of subject subscription
-  ngOnDestroy() {
-    this.bookSubs.unsubscribe();
-  }
-
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { BookService } from 'src/app/shared/services/book.service';
+import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
   selector: 'app-book-collection',
@@ -9,15 +9,12 @@ import { BookService } from 'src/app/shared/services/book.service';
   styleUrls: ['./book-collection.component.scss'],
 })
 export class BookCollectionComponent implements OnInit {
-  books: any[] = [];
-  bookSubs: Subscription;
-  constructor(private bookService: BookService) {}
+  collection$: Observable<any>
+  User$: Observable<any>;
+  constructor(private bookFascade: BooksFascade) {}
 
   ngOnInit(): void {
-    this.bookSubs = this.bookService
-      .getBookCollectionListener()
-      .subscribe((res) => {
-        this.books = res;
-      });
+    this.collection$ = this.bookFascade.collectionItem$;
+    this.User$ = this.bookFascade.User$;
   }
 }

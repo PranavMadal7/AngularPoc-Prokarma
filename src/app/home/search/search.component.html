@@ -5,7 +5,16 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </form>
-<div class="cards">
+<!-- <form class="example-form" autocomplete="off">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search Books</mat-label>
+    <input matInput placeholder="Ex. Pizza" #value name="value" [(ngModel)]="searchTerm" >
+    <mat-icon aria-hidden="false" aria-label="Example icon" (click)="searchBook(value.value)">search</mat-icon>
+
+  </mat-form-field>
+
+</form> -->
+<div class="cards" >
   <mat-card class="books-card" *ngFor="let item of bookItems" (click)="onBookSelect(item)">
     <div class="cardHeader">
       <mat-card-header>

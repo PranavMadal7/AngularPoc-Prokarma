@@ -7,6 +7,7 @@ import { BuyNowComponent } from './buy-now/buy-now.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 import { BookCollectionComponent } from './book-collection/book-collection.component';
 import { RoutingModule } from '../routing/routing.module';
+import { BookDetailsRoutingModule } from './boook-details-routing.module';
 
 
 
@@ -16,7 +17,8 @@ import { RoutingModule } from '../routing/routing.module';
     CommonModule,
     RoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BookDetailsRoutingModule
   ],
   exports: [BuyNowComponent, AddToCartComponent, BookCollectionComponent]
 })

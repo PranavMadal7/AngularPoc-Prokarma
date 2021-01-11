@@ -1,48 +1,49 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { BookService } from 'src/app/shared/services/book.service';
+import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
 })
-export class BookComponent implements OnInit, OnDestroy {
-  book: any;
-  item: string;
-  bookSubs: Subscription;
-  rating: number;
-  starList: boolean[] = [true, true, true, true, true];
-  constructor(private bookService: BookService, private router: Router) {}
+export class BookComponent implements OnInit {
+
+  selectedBook$: Observable<any>;
+
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private router: Router,
+    private booksFacade: BooksFascade
+  ) {}
 
   ngOnInit() {
-    this.bookSubs = this.bookService.getBookItemListener().subscribe((res) => {
-      this.book = res;
-      this.rating = res.volumeInfo.averageRating;
-      let data = this.rating + 1;
-      for (var i = 0; i <= 4; i++) {
-        if (i <= data) {
-          this.starList[i] = false;
-        } else {
-          this.starList[i] = true;
-        }
-      }
+    let bookId: any;
+    this.activateRoute.params.subscribe((data) => {
+      bookId = data.id;
+      console.log(bookId);
     });
+    if (bookId) {
+      this.selectedBook$ = this.booksFacade.AllBooks$.pipe(
+        map((books) => books['items'].filter((book) => book.id === bookId)[0])
+      );
+    }
   }
 
   addToCart() {
-    this.bookService.addCart(this.book);
-    this.bookService.bookItem.next(this.book);
+    this.selectedBook$.subscribe((data) =>
+      this.booksFacade.addToCart({ book: data })
+    );
     this.router.navigate(['/addToCart']);
   }
 
   buyNow() {
+    this.selectedBook$.subscribe((data) =>
+      this.booksFacade.addToCollection({ book: data })
+    );
     this.router.navigate(['/buyNow']);
-  }
-
-  ngOnDestroy() {
-    this.bookSubs.unsubscribe();
   }
 }

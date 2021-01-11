@@ -1,33 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BookService } from '../services/book.service';
+import { Component, OnInit } from '@angular/core';
+
+import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit, OnDestroy {
+export class SideNavComponent implements OnInit {
   cartCount: number;
   collectionCount: number;
-  cartSubs: Subscription;
-  collectionSubs: Subscription;
-  constructor(private bookService: BookService) {}
+
+  constructor(private bookFascade: BooksFascade) {}
 
   ngOnInit(): void {
-    this.collectionSubs = this.bookService
-      .getBookCollectionListener()
-      .subscribe((res) => {
-        this.collectionCount = res.length;
-      });
-
-    this.cartSubs = this.bookService.getCartListener().subscribe((res) => {
-      this.cartCount = res.length;
+    this.bookFascade.cartItems$.subscribe((data) => {
+      this.cartCount = data.length;
       if (this.cartCount === 0) {
         this.cartCount = null;
       }
     });
+
+    this.bookFascade.collectionItem$.subscribe(data => {
+      this.collectionCount = data.length;
+      if (this.collectionCount === 0) {
+        this.collectionCount = null;
+      }
+    });
   }
 
-  ngOnDestroy() {}
 }
