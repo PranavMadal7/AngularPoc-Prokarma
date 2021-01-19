@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { Book } from 'src/app/shared/book.interface';
 import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
@@ -11,8 +12,7 @@ import { BooksFascade } from 'src/app/store/books.fascade';
   styleUrls: ['./book.component.scss'],
 })
 export class BookComponent implements OnInit {
-
-  selectedBook$: Observable<any>;
+  selectedBook$: Observable<Book>;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -28,7 +28,7 @@ export class BookComponent implements OnInit {
     });
     if (bookId) {
       this.selectedBook$ = this.booksFacade.AllBooks$.pipe(
-        map((books) => books['items'].filter((book) => book.id === bookId)[0])
+        map((books) => books.filter((book) => book.id === bookId)[0])
       );
     }
   }

@@ -19,6 +19,6 @@ export interface SearchBook {
 export interface User {
   name: string;
   email: string;
-  mobile: string;
+  phoneNumber: string;
   address: string;
 }

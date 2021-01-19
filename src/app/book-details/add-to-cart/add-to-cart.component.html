@@ -1,17 +1,17 @@
 <ng-container *ngIf="cartItems$|async">
   <mat-card class="book-card" *ngFor="let book of cartItems$|async">
     <div class="cardHeader">
-      <mat-card-title class="title">{{ book.volumeInfo.title }}</mat-card-title>
+      <mat-card-title class="title">{{ book.title }}</mat-card-title>
       <div class="header-image">
-        <img src="{{ book.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+        <img src="{{ book.imageLinks }}" alt="" />
       </div>
     </div>
     <mat-card-content class="cardContent">
-      <p>{{ book.volumeInfo.description }}</p>
+      <p>{{ book.description }}</p>
     </mat-card-content>
     <div class="author">
       <span class="authorTitle">Written By:</span>
-      <span>{{ book.volumeInfo.authors.join(" and ") }}</span>
+      <span>{{ book.authors.join(" and ") }}</span>
     </div>
     <mat-card-actions>
       <button mat-flat-button color="accent" (click)="deleteBook(book)">

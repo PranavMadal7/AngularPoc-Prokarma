@@ -1,19 +1,19 @@
 <ng-container *ngIf="collection$ | async">
   <mat-card class="book-card" *ngFor="let book of collection$ | async">
     <div class="cardHeader">
-      <mat-card-title class="title">{{ book.volumeInfo.title }}</mat-card-title>
+      <mat-card-title class="title">{{ book.title }}</mat-card-title>
       <div class="header-image">
-        <img src="{{ book.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+        <img src="{{ book.imageLinks }}" alt="" />
       </div>
     </div>
     <mat-card-content class="cardContent">
-      <p>{{ book.volumeInfo.description }}</p>
+      <p>{{ book.description }}</p>
     </mat-card-content>
     <div class="author">
       <span class="authorTitle">Written By:</span>
     </div>
-    <span *ngIf="book.volumeInfo.authors">
-      {{ book.volumeInfo.authors.join(" and ") }}
+    <span *ngIf="book.authors">
+      {{ book.authors.join(" and ") }}
     </span>
     <mat-card-footer *ngIf="User$| async as user">
       <div class="footerHeader">

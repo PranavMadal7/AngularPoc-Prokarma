@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Book } from 'src/app/shared/book.interface';
 
 import { BooksFascade } from 'src/app/store/books.fascade';
+import { Cart } from 'src/app/store/cart.reducer';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -10,7 +12,7 @@ import { BooksFascade } from 'src/app/store/books.fascade';
   styleUrls: ['./add-to-cart.component.scss'],
 })
 export class AddToCartComponent implements OnInit {
-  books: any[] = [];
+  books: Book[] = [];
   // bookSubs: Subscription;
   count: number;
   cartItems$: Observable<any[]>;

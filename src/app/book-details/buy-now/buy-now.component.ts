@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BooksFascade } from 'src/app/store/books.fascade';
+import { Book } from 'src/app/shared/book.interface';
 
 @Component({
   selector: 'app-buy-now',
@@ -13,7 +14,6 @@ import { BooksFascade } from 'src/app/store/books.fascade';
 export class BuyNowComponent implements OnInit {
   billingForm: FormGroup;
   bookSubs: Subscription;
-  book: any = {};
 
   constructor(
     private bookfascade: BooksFascade,

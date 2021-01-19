@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Book, User } from 'src/app/shared/book.interface';
 
 import { BooksFascade } from 'src/app/store/books.fascade';
 
@@ -9,8 +10,8 @@ import { BooksFascade } from 'src/app/store/books.fascade';
   styleUrls: ['./book-collection.component.scss'],
 })
 export class BookCollectionComponent implements OnInit {
-  collection$: Observable<any>
-  User$: Observable<any>;
+  collection$: Observable<Book[]>
+  User$: Observable<User>;
   constructor(private bookFascade: BooksFascade) {}
 
   ngOnInit(): void {

@@ -5,36 +5,33 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </form>
-<!-- <form class="example-form" autocomplete="off">
-  <mat-form-field class="example-full-width">
-    <mat-label>Search Books</mat-label>
-    <input matInput placeholder="Ex. Pizza" #value name="value" [(ngModel)]="searchTerm" >
-    <mat-icon aria-hidden="false" aria-label="Example icon" (click)="searchBook(value.value)">search</mat-icon>
-
-  </mat-form-field>
-
-</form> -->
-<div class="cards" >
-  <mat-card class="books-card" *ngFor="let item of bookItems" (click)="onBookSelect(item)">
+<div class="cards">
+  <mat-card
+    class="books-card"
+    *ngFor="let item of bookItems"
+    (click)="onBookSelect(item)"
+  >
     <div class="cardHeader">
       <mat-card-header>
-        <mat-card-title>{{item.volumeInfo.title}}</mat-card-title>
+        <mat-card-title>{{ item.title }}</mat-card-title>
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
-      <div class="header-image" *ngIf="item.volumeInfo.imageLinks">
-        <img src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="">
+      <div class="header-image" *ngIf="item.imageLinks">
+        <img src="{{ item.imageLinks }}" alt="" />
       </div>
     </div>
     <mat-card-content>
       <p>
-        {{item.volumeInfo.description}}
+        {{ item.description }}
       </p>
     </mat-card-content>
     <mat-card-footer>
       <div class="footerHeader">
         <span>Written By:</span>
       </div>
-      <span *ngIf="item.volumeInfo.authors">{{item.volumeInfo.authors.join(' and ')}}</span>
+      <span *ngIf="item.authors">{{
+        item.authors.join(" and ")
+      }}</span>
     </mat-card-footer>
   </mat-card>
 </div>

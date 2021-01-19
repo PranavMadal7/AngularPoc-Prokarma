@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Book, SearchBook } from 'src/app/shared/book.interface';
+import { Book } from 'src/app/shared/book.interface';
 import { BooksFascade } from 'src/app/store/books.fascade';
 
 @Component({
@@ -13,13 +13,13 @@ import { BooksFascade } from 'src/app/store/books.fascade';
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   searchTerm: string;
-  bookItems: any;
+  bookItems: Book[];
 
   constructor(private router: Router, private bookFascade: BooksFascade) {}
 
   ngOnInit(): void {
     this.bookFascade.AllBooks$.subscribe((res) => {
-      this.bookItems = res['items'];
+      this.bookItems = res;
     });
 
     this.bookFascade.searchTerm$.subscribe((data) => {
