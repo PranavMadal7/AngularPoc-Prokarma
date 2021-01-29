@@ -24,7 +24,6 @@ export class BookComponent implements OnInit {
     let bookId: string;
     this.activateRoute.params.subscribe((data) => {
       bookId = data.id;
-      console.log(bookId);
     });
     if (bookId) {
       this.selectedBook$ = this.booksFacade.AllBooks$.pipe(

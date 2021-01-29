@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   fakeAsync,
@@ -17,11 +17,12 @@ import { Observable } from 'rxjs';
 import { BooksFascade } from 'src/app/store/books.fascade';
 import { reducers } from 'src/app/store/books.selector';
 import { BuyNowComponent } from './buy-now.component';
+import { User } from 'src/app/shared/book.interface';
 
 describe('BuyNowComponent', () => {
   let component: BuyNowComponent;
   let fixture: ComponentFixture<BuyNowComponent>;
-  let book;
+  let user;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,6 +42,12 @@ describe('BuyNowComponent', () => {
     fixture = TestBed.createComponent(BuyNowComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
+    user = {
+      name: 'some name',
+      email: 'some eamil',
+      phoneNumber: '1234567891',
+      address: 'some address',
+    };
     fixture.detectChanges();
   });
 
@@ -53,14 +60,44 @@ describe('BuyNowComponent', () => {
     expect(component.billingForm.valid).toBeFalsy();
   });
 
-  function billingForm(name, email, phoneNumber, address) {
-    component.billingForm.controls['name'].setValue(name);
-    component.billingForm.controls['email'].setValue(email);
-    component.billingForm.controls['phoneNumber'].setValue(phoneNumber);
-    component.billingForm.controls['address'].setValue(address);
-  }
+  it('name field validity', () => {
+    component.ngOnInit();
+    let name = component.billingForm.controls['name'];
+    expect(name.valid).toBeFalsy();
+    let errors = {};
+    errors = name.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
 
-  it('on submit should add book to collction ', fakeAsync(() => {
+  it('email field validity', () => {
+    component.ngOnInit();
+    let email = component.billingForm.controls['email'];
+    expect(email.valid).toBeFalsy();
+    let errors = {};
+    errors = email.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+
+  it('phone number field validity', () => {
+    component.ngOnInit();
+    let phoneNumber = component.billingForm.controls['phoneNumber'];
+    expect(phoneNumber.valid).toBeFalsy();
+    let errors = {};
+    errors = phoneNumber.errors;
+    expect(errors['required']).toBeTruthy();
+  });
+
+  it('address field validity', () => {
+    component.ngOnInit();
+    let address = component.billingForm.controls['address'];
+    expect(address.valid).toBeFalsy();
+    let errors = {};
+    errors = address.errors;
+    expect(errors['required']).toBeTruthy();
+  });
+
+  it('on submit should add book to collection ', fakeAsync(() => {
+    expect(component.billingForm.valid).toBeFalsy();
     const facade = TestBed.inject(BooksFascade);
     const spy1 = spyOn(facade, 'addUser');
     component.billingForm.valid;
@@ -70,4 +107,13 @@ describe('BuyNowComponent', () => {
       expect(spy1);
     });
   }));
+
+  it('opens pop up dialog', () => {
+    expect(component.openSnackBar()).toHaveBeenCalled();
+  });
+
+  it('should return biiling form controls', () => {
+    expect(component.f).toBe(component.billingForm.controls);
+  });
+
 });
