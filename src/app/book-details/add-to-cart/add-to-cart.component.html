@@ -1,5 +1,5 @@
-<ng-container *ngIf="cartItems$|async">
-  <mat-card class="book-card" *ngFor="let book of cartItems$|async">
+<ng-container *ngIf="cartItems$ | async">
+  <mat-card class="book-card" *ngFor="let book of cartItems$ | async">
     <div class="cardHeader">
       <mat-card-title class="title">{{ book.title }}</mat-card-title>
       <div class="header-image">

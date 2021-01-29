@@ -6,10 +6,11 @@ import { Book } from '../book.interface';
   providedIn: 'root'
 })
 export class ApiService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   onSearch(searchItems) {
-    return this.http.get<Book[]>('http://localhost:3000/api/books/' + searchItems);
+    return this.http.get<Book[]>(
+      'http://localhost:3000/api/books/' + searchItems
+    );
   }
 }

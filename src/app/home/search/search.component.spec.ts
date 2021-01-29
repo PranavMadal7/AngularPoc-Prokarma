@@ -18,7 +18,11 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StoreModule.forRoot(reducers), ReactiveFormsModule],
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot(reducers),
+        ReactiveFormsModule,
+      ],
       declarations: [SearchComponent],
       providers: [BooksFascade],
       schemas: [NO_ERRORS_SCHEMA],
@@ -111,16 +115,6 @@ describe('SearchComponent', () => {
     errors = search.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-
-  // it('submitting a form and loading the books', () => {
-  //   component.ngOnInit();
-  //   expect(component.searchForm.valid).toBeFalsy();
-  //   component.searchForm.controls['searchBooks'].setValue('angular');
-  //   expect(component.searchForm.valid).toBeTruthy();
-
-  //   let books: Book[];
-
-  // });
 
   it('should set the book items', inject(
     [BooksFascade],

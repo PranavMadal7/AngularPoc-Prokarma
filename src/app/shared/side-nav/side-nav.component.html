@@ -7,13 +7,23 @@
   </div>
   <div class="sideNavTitle">
     <a [routerLink]="['/addToCart']">
-      <mat-icon matBadge="{{cartCount}}" matBadgePosition="before" matBadgeColor="accent">shopping_cart</mat-icon>
+      <mat-icon
+        matBadge="{{ cartCount }}"
+        matBadgePosition="before"
+        matBadgeColor="accent"
+        >shopping_cart</mat-icon
+      >
       <span>Cart</span>
     </a>
   </div>
   <div class="sideNavTitle">
     <a [routerLink]="['/myCollection']">
-      <mat-icon matBadge="{{collectionCount}}" matBadgePosition="before" matBadgeColor="accent">library_books</mat-icon>
+      <mat-icon
+        matBadge="{{ collectionCount }}"
+        matBadgePosition="before"
+        matBadgeColor="accent"
+        >library_books</mat-icon
+      >
       <span>My Collection</span>
     </a>
   </div>

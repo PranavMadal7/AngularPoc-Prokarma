@@ -21,7 +21,7 @@ import { RoutingModule } from '../routing/routing.module';
     MatSidenavModule,
     AngularMaterialModule,
     MatBadgeModule,
-    RoutingModule
+    RoutingModule,
   ],
   exports: [HeaderComponent, SideNavComponent],
 })

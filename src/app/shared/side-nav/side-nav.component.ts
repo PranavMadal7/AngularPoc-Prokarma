@@ -21,12 +21,11 @@ export class SideNavComponent implements OnInit {
       }
     });
 
-    this.bookFascade.collectionItem$.subscribe(data => {
+    this.bookFascade.collectionItem$.subscribe((data) => {
       this.collectionCount = data.length;
       if (this.collectionCount === 0) {
         this.collectionCount = null;
       }
     });
   }
-
 }

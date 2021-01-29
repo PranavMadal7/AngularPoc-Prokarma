@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Book, User } from '../shared/book.interface'
+import { Book, User } from '../shared/book.interface';
 import * as bookActions from './books.action';
 
 export interface State {

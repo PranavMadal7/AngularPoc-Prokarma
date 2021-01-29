@@ -49,7 +49,9 @@ describe('bookFascade', () => {
   it('should call action with seathterm', () => {
     const spy = spyOn(store, 'dispatch');
     facade.loadBooks({ searchTerm: 'java' });
-    expect(spy).toHaveBeenCalledWith(fromAction.loadBooks({ searchTerm: 'java' }));
+    expect(spy).toHaveBeenCalledWith(
+      fromAction.loadBooks({ searchTerm: 'java' })
+    );
   });
   it('should be add to cart action', () => {
     const spy = spyOn(store, 'dispatch');
@@ -68,7 +70,9 @@ describe('bookFascade', () => {
   it('should remove from cart ', () => {
     const spy = spyOn(store, 'dispatch');
     facade.removeFromCart('0BSOg0oHhZ0C');
-    expect(spy).toHaveBeenCalledWith(cartAction.deleteUser({ id: '0BSOg0oHhZ0C' }));
+    expect(spy).toHaveBeenCalledWith(
+      cartAction.deleteUser({ id: '0BSOg0oHhZ0C' })
+    );
   });
 
   it('should  add user ', () => {

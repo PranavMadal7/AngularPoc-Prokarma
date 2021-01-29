@@ -15,7 +15,7 @@
     <span *ngIf="book.authors">
       {{ book.authors.join(" and ") }}
     </span>
-    <mat-card-footer *ngIf="User$| async as user">
+    <mat-card-footer *ngIf="User$ | async as user">
       <div class="footerHeader">
         <span>Billing Address</span>
       </div>

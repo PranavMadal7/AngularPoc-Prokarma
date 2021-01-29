@@ -1,38 +1,37 @@
-<mat-card class="book-card" *ngIf="selectedBook$ |async as selectedBook">
+<mat-card class="book-card" *ngIf="selectedBook$ | async as selectedBook">
   <div class="cardHeader">
-    <mat-card-title class="title">{{selectedBook.title}}</mat-card-title>
+    <mat-card-title class="title">{{ selectedBook.title }}</mat-card-title>
     <div class="header-image" *ngIf="selectedBook.imageLinks">
-      <img
-        src="{{selectedBook.imageLinks}}"
-        alt=""
-      />
+      <img src="{{ selectedBook.imageLinks }}" alt="" />
     </div>
   </div>
   <mat-card-content class="cardContent">
     <div>
       <span class="cardTitle">Rating: </span>
-      <span>{{selectedBook.averageRating}}</span>
+      <span>{{ selectedBook.averageRating }}</span>
     </div>
     <div>
       <span class="cardTitle">Publisher: </span>
-      <span>{{selectedBook.publisher}}</span>
+      <span>{{ selectedBook.publisher }}</span>
     </div>
     <div>
       <span class="cardTitle">Page Count: </span>
-      <span>{{selectedBook.pageCount}}</span>
+      <span>{{ selectedBook.pageCount }}</span>
     </div>
     <div>
       <span class="cardTitle">Language: </span>
-      <span>{{selectedBook.language}}</span>
+      <span>{{ selectedBook.language }}</span>
     </div>
-    <p>{{selectedBook.description}}</p>
+    <p>{{ selectedBook.description }}</p>
   </mat-card-content>
   <div class="author">
     <span class="authorTitle">Written By:</span>
-    <span>{{selectedBook?.authors?.join(' and ')}}</span>
+    <span>{{ selectedBook?.authors?.join(" and ") }}</span>
   </div>
   <mat-card-actions>
-    <button mat-flat-button color="accent" (click)="addToCart()">ADD TO CART</button>
+    <button mat-flat-button color="accent" (click)="addToCart()">
+      ADD TO CART
+    </button>
     <button mat-flat-button color="accent" (click)="buyNow()">BUY</button>
   </mat-card-actions>
 </mat-card>

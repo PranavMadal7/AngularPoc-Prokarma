@@ -30,7 +30,7 @@ import { BooksEffects } from './store/books.effect';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([BooksEffects])
+    EffectsModule.forRoot([BooksEffects]),
   ],
   providers: [BooksFascade],
   bootstrap: [AppComponent],

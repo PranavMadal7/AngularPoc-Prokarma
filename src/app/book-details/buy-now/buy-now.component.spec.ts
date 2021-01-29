@@ -8,7 +8,7 @@ import {
 } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { OverlayModule } from "@angular/cdk/overlay";
+import { OverlayModule } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
@@ -29,7 +29,7 @@ describe('BuyNowComponent', () => {
         RouterTestingModule,
         StoreModule.forRoot(reducers),
         ReactiveFormsModule,
-        OverlayModule
+        OverlayModule,
       ],
       declarations: [BuyNowComponent],
       providers: [BooksFascade, MatSnackBar],

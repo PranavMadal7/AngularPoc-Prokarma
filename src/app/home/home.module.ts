@@ -24,9 +24,8 @@ import { HomeRoutingModule } from './home-routing.module';
     MatInputModule,
     MatButtonModule,
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ],
   exports: [SearchComponent, BookComponent],
 })
-export class HomeModule {
-}
+export class HomeModule {}

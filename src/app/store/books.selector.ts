@@ -42,7 +42,6 @@ export const selectSearchTerm = createSelector(
   (state: State) => state.searchTerm
 );
 
-
 export const metaReducers: MetaReducer<AppState>[] = !environment.production
   ? [logger]
   : [];

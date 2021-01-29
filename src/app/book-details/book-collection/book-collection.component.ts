@@ -10,8 +10,9 @@ import { BooksFascade } from 'src/app/store/books.fascade';
   styleUrls: ['./book-collection.component.scss'],
 })
 export class BookCollectionComponent implements OnInit {
-  collection$: Observable<Book[]>
+  collection$: Observable<Book[]>;
   User$: Observable<User>;
+
   constructor(private bookFascade: BooksFascade) {}
 
   ngOnInit(): void {

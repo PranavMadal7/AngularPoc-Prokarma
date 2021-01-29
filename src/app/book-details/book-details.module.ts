@@ -9,8 +9,6 @@ import { BookCollectionComponent } from './book-collection/book-collection.compo
 import { RoutingModule } from '../routing/routing.module';
 import { BookDetailsRoutingModule } from './boook-details-routing.module';
 
-
-
 @NgModule({
   declarations: [BuyNowComponent, AddToCartComponent, BookCollectionComponent],
   imports: [
@@ -18,8 +16,8 @@ import { BookDetailsRoutingModule } from './boook-details-routing.module';
     RoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    BookDetailsRoutingModule
+    BookDetailsRoutingModule,
   ],
-  exports: [BuyNowComponent, AddToCartComponent, BookCollectionComponent]
+  exports: [BuyNowComponent, AddToCartComponent, BookCollectionComponent],
 })
-export class BookDetailsModule { }
+export class BookDetailsModule {}
