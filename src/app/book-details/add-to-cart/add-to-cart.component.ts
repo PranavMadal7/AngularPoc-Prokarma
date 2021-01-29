@@ -13,9 +13,8 @@ import { Cart } from 'src/app/store/cart.reducer';
 })
 export class AddToCartComponent implements OnInit {
   books: Book[] = [];
-  // bookSubs: Subscription;
   count: number;
-  cartItems$: Observable<any[]>;
+  cartItems$: Observable<Book[]>;
   constructor(private bookFascade: BooksFascade, private router: Router) {}
 
   ngOnInit(): void {

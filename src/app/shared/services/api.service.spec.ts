@@ -44,11 +44,11 @@ describe('ApiService', () => {
       },
     ];
     service.onSearch('java').subscribe((courseData) => {
-      expect(courseData.items[0].id).toEqual('0BSOg0oHhZ0C');
+      expect(courseData).toEqual(books);
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:5000/api/books/java'
+      'http://localhost:3000/api/books/java'
     );
 
     expect(req.request.method).toEqual('GET');

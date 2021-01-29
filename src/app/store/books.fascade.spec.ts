@@ -75,7 +75,7 @@ describe('bookFascade', () => {
     const user = {
       name: 'somename',
       email: 'some email',
-      mobile: 'some mobile',
+      phoneNumber: 'some mobile',
       address: 'some address',
     };
     const spy = spyOn(store, 'dispatch');

@@ -15,7 +15,7 @@ export const bookReducerKey = 'book';
 const initalUser: User = {
   name: '',
   email: '',
-  mobile: '',
+  phoneNumber: '',
   address: '',
 };
 

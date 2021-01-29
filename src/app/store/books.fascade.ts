@@ -1,5 +1,5 @@
 import { Cart } from './cart.reducer';
-import { Book, SearchBook } from '../shared/book.interface';
+import { Book, SearchBook, User } from '../shared/book.interface';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class BooksFascade {
   >;
 
   cartItems$ = this.store.select(cartSeletor.selectAllBooks) as Observable<
-    Cart[]
+    Book[]
   >;
 
   collectionItem$ = this.store.select(
@@ -29,7 +29,7 @@ export class BooksFascade {
     booksSelector.selectSearchTerm
   ) as Observable<string>;
 
-  User$ = this.store.select(booksSelector.selectUser) as Observable<any>;
+  User$ = this.store.select(booksSelector.selectUser) as Observable<User>;
 
   loadBooks(payload): void {
     this.store.dispatch(loadBooks(payload));

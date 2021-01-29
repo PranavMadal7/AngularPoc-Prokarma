@@ -30,7 +30,7 @@ describe('BookCollectionComponent', () => {
     user = {
       name: 'some name',
       email: 'some eamil',
-      mobile: 'some mobile',
+      phoneNumber: 'some mobile',
       address: 'some address',
     };
     book = [

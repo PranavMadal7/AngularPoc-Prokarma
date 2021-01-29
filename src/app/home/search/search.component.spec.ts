@@ -1,9 +1,11 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Book } from 'src/app/shared/book.interface';
 import { BooksFascade } from 'src/app/store/books.fascade';
 import { reducers } from 'src/app/store/books.selector';
 
@@ -16,7 +18,7 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
+      imports: [RouterTestingModule, StoreModule.forRoot(reducers), ReactiveFormsModule],
       declarations: [SearchComponent],
       providers: [BooksFascade],
       schemas: [NO_ERRORS_SCHEMA],
@@ -95,10 +97,35 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('search form validity', () => {
+    component.ngOnInit();
+    expect(component.searchForm.valid).toBeFalsy();
+  });
+
+  it('search field validity', () => {
+    component.ngOnInit();
+    let search = component.searchForm.controls['searchBooks'];
+    expect(search.valid).toBeFalsy();
+
+    let errors = {};
+    errors = search.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+
+  // it('submitting a form and loading the books', () => {
+  //   component.ngOnInit();
+  //   expect(component.searchForm.valid).toBeFalsy();
+  //   component.searchForm.controls['searchBooks'].setValue('angular');
+  //   expect(component.searchForm.valid).toBeTruthy();
+
+  //   let books: Book[];
+
+  // });
+
   it('should set the book items', inject(
     [BooksFascade],
     (fascade: BooksFascade) => {
-      fascade.cartItems$ = new Observable((obs) => {
+      fascade.AllBooks$ = new Observable((obs) => {
         obs.next(book);
         obs.complete();
       });
